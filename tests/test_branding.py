@@ -10,7 +10,7 @@ class BrandingTests(unittest.TestCase):
         self.assertEqual(APP_TEAM, "Команда КАИРО")
         self.assertEqual(APP_DEVELOPER, "Иващенко Сергей Сергеевич")
         self.assertTrue(APP_DESCRIPTION)
-        self.assertEqual(APP_VERSION, "0.1.1")
+        self.assertEqual(APP_VERSION, "0.1.2")
 
     def test_images(self):
         for name in ("logo-original.png", "logo-header.png", "logo-about.png", "app-icon.png"):

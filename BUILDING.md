@@ -1,6 +1,6 @@
 # АПО.ТИМИМО: сборка приложений для Windows, macOS и Linux
 
-**Проект:** АПО.ТИМИМО, версия 0.1.1. **Разработка:** команда КАИРО. **Разработчик:** Иващенко Сергей Сергеевич.
+**Проект:** АПО.ТИМИМО, версия 0.1.2. **Разработка:** команда КАИРО. **Разработчик:** Иващенко Сергей Сергеевич.
 
 ## Что находится в проекте
 
@@ -21,10 +21,10 @@
 
 | Платформа | Файл внутри загруженного артефакта | Запуск |
 |---|---|---|
-| Windows x64 | `APO_TIMIMO_v0.1.1_Windows_x64.zip` | Извлечь и открыть `APO_TIMIMO.exe` |
-| macOS Apple Silicon | `APO_TIMIMO_v0.1.1_macOS_arm64.zip` | Извлечь и открыть `APO_TIMIMO.app` |
-| macOS Intel | `APO_TIMIMO_v0.1.1_macOS_x64.zip` | Извлечь и открыть `APO_TIMIMO.app` |
-| Linux x64 (Ubuntu 22.04) | `APO_TIMIMO_v0.1.1_Linux_x64.tar.gz` | Извлечь и выполнить `./Start_APO_TIMIMO.sh` |
+| Windows x64 | `APO_TIMIMO_v0.1.2_Windows_x64.zip` | Извлечь и открыть `APO_TIMIMO.exe` |
+| macOS Apple Silicon | `APO_TIMIMO_v0.1.2_macOS_arm64.zip` | Извлечь и открыть `APO_TIMIMO.app` |
+| macOS Intel | `APO_TIMIMO_v0.1.2_macOS_x64.zip` | Извлечь и открыть `APO_TIMIMO.app` |
+| Linux x64 (Ubuntu 22.04) | `APO_TIMIMO_v0.1.2_Linux_x64.tar.gz` | Извлечь и выполнить `./Start_APO_TIMIMO.sh` |
 
 Из-за устройства PyInstaller **нативный исполняемый файл собирается на своей ОС**. Workflow позволяет не устанавливать все три ОС локально.
 
@@ -44,11 +44,11 @@ python scripts/build_release.py
 
 ## Проверенные сейчас результаты
 
-В среде Debian 13 x86_64 протестирован специальный пакет `APO_TIMIMO_v0.1.1_Linux_Debian13_x86_64.tar.gz` со встроенным Python. Проверка `./APO_TIMIMO --self-test` завершилась успешно, PDF-экспорт создан; окно запустилось под Xvfb. **Этот пакет нельзя считать универсальным для других Linux**: нужна glibc ≥2.41 и работающая графическая среда X11. Для более широкой совместимости используйте сборку Linux из GitHub Actions (Ubuntu 22.04).
+В среде Debian 13 x86_64 протестирован специальный пакет `APO_TIMIMO_v0.1.2_Linux_Debian13_x86_64.tar.gz` со встроенным Python. Проверка `./APO_TIMIMO --self-test` завершилась успешно, PDF-экспорт создан; окно запустилось под Xvfb. **Этот пакет нельзя считать универсальным для других Linux**: нужна glibc ≥2.41 и работающая графическая среда X11. Для более широкой совместимости используйте сборку Linux из GitHub Actions (Ubuntu 22.04).
 
 ## Режим из исходного кода (Python требуется)
 
-Если нет готового нативного пакета, `APO_TIMIMO_Windows_SOURCE_v0.1.1.zip` запускается через `START_WINDOWS.cmd`, а `APO_TIMIMO_macOS_SOURCE_v0.1.1.zip` — через `START_MACOS.command`. Оба пакета **требуют установленный Python** и не являются самостоятельными `.exe`/`.app`.
+Если нет готового нативного пакета, `APO_TIMIMO_Windows_SOURCE_v0.1.2.zip` запускается через `START_WINDOWS.cmd`, а `APO_TIMIMO_macOS_SOURCE_v0.1.2.zip` — через `START_MACOS.command`. Оба пакета **требуют установленный Python** и не являются самостоятельными `.exe`/`.app`.
 
 ## Безопасность и приватность
 

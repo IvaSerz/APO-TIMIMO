@@ -18,7 +18,7 @@ ASSETS = ROOT / "software_audit" / "assets"
 DIST = ROOT / "dist"
 RELEASES = ROOT / "releases"
 APP = "APO_TIMIMO"
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 
 
 def checked(args: list[str], **kwargs) -> None:
