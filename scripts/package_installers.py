@@ -11,6 +11,7 @@ import platform
 import shutil
 import subprocess
 import tempfile
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
@@ -59,8 +60,20 @@ def package_macos() -> Path:
         stage.mkdir()
         shutil.copytree(app, stage / app.name, symlinks=True)
         (stage / "Applications").symlink_to("/Applications", target_is_directory=True)
-        run(["hdiutil", "create", "-volname", "APO.TIMIMO", "-srcfolder", str(stage),
-             "-ov", "-format", "UDZO", str(output)])
+        command = ["hdiutil", "create", "-volname", "APO.TIMIMO", "-srcfolder", str(stage),
+                   "-ov", "-format", "UDZO", str(output)]
+        # Hosted macOS runners occasionally return 'Resource busy' from DiskImages.
+        for attempt in range(1, 5):
+            try:
+                if output.exists():
+                    output.unlink()
+                run(command)
+                break
+            except subprocess.CalledProcessError:
+                if attempt == 4:
+                    raise
+                print(f"DMG creation attempt {attempt}/4 failed; retrying", flush=True)
+                time.sleep(5 * attempt)
     if not output.is_file():
         raise FileNotFoundError(output)
     return output
