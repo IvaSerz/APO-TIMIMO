@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+build/
+dist/
+*.spec
+.DS_Store
+
+# Local generated packages, do not commit binaries
+releases/

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=АПО.ТИМИМО
+GenericName=Аудит программного обеспечения
+Comment=Локальная инвентаризация установленного ПО
+Exec=APO_TIMIMO
+Icon=utilities-system-monitor
+Terminal=false
+Categories=System;Utility;

@@ -1,0 +1,69 @@
+name: Build APO.TIMIMO for Windows macOS and Linux
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  native-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: windows-2022
+            variant: Windows_x64
+          - host: ubuntu-22.04
+            variant: Linux_x64
+          - host: macos-15
+            variant: macOS_arm64
+          - host: macos-15-intel
+            variant: macOS_x64
+    runs-on: ${{ matrix.host }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install build dependencies
+        run: python -m pip install --upgrade "pyinstaller>=6.12,<7" "reportlab>=4,<5" "pillow>=10,<13"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Build app and run headless smoke tests
+        run: python scripts/build_release.py
+      - name: Upload native download
+        uses: actions/upload-artifact@v4
+        with:
+          name: APO_TIMIMO_${{ matrix.variant }}
+          path: releases/*
+          if-no-files-found: error
+          retention-days: 90
+
+  release:
+    # Only publish GitHub Releases for version tags after all four OS builds pass.
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: native-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download platform builds
+        uses: actions/download-artifact@v4
+        with:
+          pattern: APO_TIMIMO_*
+          path: release-files
+          merge-multiple: true
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" release-files/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "АПО.ТИМИМО $GITHUB_REF_NAME" \
+            --notes "АПО.ТИМИМО: локальная инвентаризация установленного ПО. Неподписанные сборки Windows, macOS (Apple Silicon и Intel), Linux."

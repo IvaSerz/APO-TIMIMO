@@ -1,0 +1,4 @@
+# Only required to export directly to PDF. CSV, JSON and HTML work without it.
+reportlab>=4.0,<5
+# Only required for producing a standalone executable (optional).
+# pyinstaller>=6.0
